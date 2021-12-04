@@ -3,7 +3,6 @@ const { models: { User } } = require('../db');
 
 // require token file -> import to all of routes
 
-// all users sorted by host and guest
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({

@@ -3,7 +3,6 @@ const { models: { Host } } = require('../db');
 
 // require token file -> import to all of routes
 
-// all users sorted by host and guest
 router.get('/', async (req, res, next) => {
     try {
         const hosts = await Host.findAll({
@@ -26,9 +25,9 @@ router.get('/', async (req, res, next) => {
     router.route('/:id')
         .get(async (req, res, next) => {
             try {
-                const user = await User.findByPk(req.params.id);
-                if (user) {
-                    res.json(user);
+                const host = await Host.findByPk(req.params.id);
+                if (host) {
+                    res.json(host);
                 } else {
                     res.sendStatus(400);
                 }
@@ -38,9 +37,9 @@ router.get('/', async (req, res, next) => {
         })
         .delete(async (req, res, next) => {
             try {
-                const user = await User.findByPk(req.params.id);
-                if (user) {
-                    await user.destroy();
+                const host = await Host.findByPk(req.params.id);
+                if (host) {
+                    await host.destroy();
                     res.sendStatus(202);
                 } else {
                     res.sendStatus(400);
@@ -53,15 +52,15 @@ router.get('/', async (req, res, next) => {
             try {
                 const { firstName, lastName, email } = req.body
                 const update = { firstName, lastName, email }
-                const user = await User.findByPk(req.params.id)
+                const host = await Host.findByPk(req.params.id)
 
-                if (user) {
-                    await user.update(update)
-                    const newUser = await User.findOne({
+                if (host) {
+                    await host.update(update)
+                    const newHost = await Host.findOne({
                         where: { id: req.params.id },
                         attributes: ["id", "firstName", "lastName", "email", "type"]
                     })
-                    res.send(newUser)
+                    res.send(newHost)
                 } else {
                     res.sendStatus(404)
                 }
