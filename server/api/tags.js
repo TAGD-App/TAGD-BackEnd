@@ -45,7 +45,7 @@ router.route('/:id')
     });
 
 router.route('/:locationId')
-    .post(async (req, res, next) => {
+    .put(async (req, res, next) => {
         //Create a single tag
         try {
             const location = await Location.findByPk(req.params.locationId)
