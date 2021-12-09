@@ -45,14 +45,14 @@ router.route('/:id')
     });
 
 router.route('/:locationId')
-    .put(async (req, res, next) => {
+    .post(async (req, res, next) => {
         //Create a single tag
         try {
             const location = await Location.findByPk(req.params.locationId)
             console.log(req.body)
             const tag = {
                 title: JSON.stringify(req.body),
-                description: "tony",
+                description: "tonys new tag",
                 imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Playing_card_spade_2.svg/1200px-Playing_card_spade_2.svg.png"
             }
             const newTag = await Tag.create(tag);
